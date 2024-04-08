@@ -7,6 +7,9 @@ DerivedData/
 # Libraries
 Libraries/
 
+# Binaries
+Bin/
+
 # User preferences
 userPreferences.*/
 
@@ -17,3 +20,6 @@ userPreferences.*/
 .DS_Store
 ehthumbs.db
 Thumbs.db
+Project/Sources/Methods/Compiler_Variables.4dm
+Project/Sources/Methods/Compiler_Methods.4dm
+Bin/System.4dbase/Resources/en.lproj/syntaxEN.json
