@@ -38,14 +38,13 @@ Function parse( ... )->$Text : Text
 	
 	$Text:=This.Text
 	
-	If (This._Translate) && (ds.Translation#Null)
-		$Text:=ds.Translation.translate($Text; This.TranslationProcess || "")
+	var $TranslationFormula : 4D.Function:=Storage.TranslationFormula
+	If (This._Translate) && ($TranslationFormula#Null)
+		$Text:=$TranslationFormula.call(Null; $Text; This.TranslationProcess || "")
 	End if 
 	
 	$Text:=Replace string($Text; "<br>"; CRLF)
 	$Text:=Replace string($Text; "<tab>"; Char(Tab))
-	
-	
 	
 	$Text:=Replace string($Text; "["; "`[`")
 	$Text:=Replace string($Text; "]"; "`]`")
