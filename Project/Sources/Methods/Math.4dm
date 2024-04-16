@@ -1,4 +1,4 @@
-//%attributes = {"shared":true}
+//%attributes = {"shared":true,"preemptive":"capable"}
 #DECLARE() : cs.Math
 
 return Storage.Singletons.Math
