@@ -3,24 +3,15 @@ property _AlternatingColor; _FirstAlternatingColor; _SecondAlternatingColor : In
 Class constructor()
 	
 Function AlternatingColors($FirstColor : Integer; $SecondColor : Integer) : Integer
-	If (This._AlternatingColor=Null)
-		This._FirstAlternatingColor:=This.LightGreen  //This.LightGreen
-		This._SecondAlternatingColor:=This.LightGray  //  This.LightBlue
-		This._AlternatingColor:=This._SecondAlternatingColor
-	End if 
-	
 	Case of 
-		: (Count parameters>=1)
-			This._FirstAlternatingColor:=$FirstColor
-		: (Count parameters>=2)
-			This._FirstAlternatingColor:=$FirstColor
-			This._SecondAlternatingColor:=$SecondColor
+		: (ProcessAlternatingColorIndex=0)
+			ProcessAlternatingColorIndex:=1
+			return Count parameters>=1 ? $FirstColor : This.LightGreen
+			
+		: (ProcessAlternatingColorIndex=1)
+			ProcessAlternatingColorIndex:=0
+			return Count parameters>=2 ? $SecondColor : This.LightGray
 	End case 
-	
-	This._AlternatingColor:=\
-		This._AlternatingColor=This._SecondAlternatingColor ? \
-		This._FirstAlternatingColor : This._SecondAlternatingColor
-	return This._AlternatingColor
 	
 Function fromRGB($Red : Integer; $Green : Integer; $Blue : Integer) : Integer
 	return ($Red << 16)+($Green << 8)+$Blue
