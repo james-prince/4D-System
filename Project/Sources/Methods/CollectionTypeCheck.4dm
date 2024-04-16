@@ -1,4 +1,4 @@
-//%attributes = {"shared":true}
+//%attributes = {"shared":true,"preemptive":"capable"}
 #DECLARE($Collection : Collection; $TypeCollection : Collection; $ClassCollection : Collection) : Boolean
 
 $Collection:=$Collection || []

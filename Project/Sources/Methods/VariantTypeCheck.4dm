@@ -1,4 +1,4 @@
-//%attributes = {"shared":true}
+//%attributes = {"shared":true,"preemptive":"capable"}
 #DECLARE($Variant : Variant; $TypeCollection : Collection; $ClassCollection : Collection) : Boolean
 
 //TODO:Replace
