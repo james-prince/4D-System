@@ -29,10 +29,10 @@ Function parse( ... )->$Text : Text
 		 ? $FirstParameter\
 		 : Copy parameters
 	
-	CollectionTypeCheck($Parameters; [\
+	TypeValidation($Parameters; True).assert(\
 		Is real; Is integer; Is longint; Is date; Is time; \
 		Is string var; Is text; Is boolean; Is undefined; Is null; \
-		Is collection/*[$Value;"FORMAT"]*/])
+		Is collection/*[$Value;"FORMAT"]*/)
 	
 	
 	
@@ -70,12 +70,12 @@ Function parse( ... )->$Text : Text
 		
 		If (Value type($Parameter)=Is collection)
 			ASSERT($Parameter.length=2)
-			VariantTypeCheck($Parameter[0]; [\
+			TypeValidation($Parameter[0]).assert(\
 				Is real; Is integer; Is longint; Is date; Is time; \
-				Is string var; Is text; Is boolean; Is undefined; Is null])
-			VariantTypeCheck($Parameter[1]; [\
+				Is string var; Is text; Is boolean; Is undefined; Is null)
+			TypeValidation($Parameter[1]).assert(\
 				Is text; Is string var; \
-				Is integer; Is integer 64 bits; Is longint; Is real])
+				Is integer; Is integer 64 bits; Is longint; Is real)
 			$Parameter:=String($Parameter[0]; $Parameter[1])
 		End if 
 		
