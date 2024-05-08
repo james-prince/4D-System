@@ -1,4 +1,6 @@
 //%attributes = {}
+_BuildREADME
+
 ASSERT(Compile project({\
 defaultTypeForButtons: Is real; \
 defaultTypeForNumerics: Is real; \
