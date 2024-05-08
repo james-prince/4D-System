@@ -10,7 +10,7 @@ Class constructor($Text : Text)
 	This._TextStyles:=[]
 	This._Uppercase:=False
 	
-Function textStyles( ...  : cs.TextStyle) : cs.Text
+Function textStyles($FirstTextStyle : cs.TextStyle;  ...  : cs.TextStyle) : cs.Text
 	This._TextStyles:=Copy parameters
 	return This
 	
