@@ -20,7 +20,7 @@ Function divRem($Dividend : Integer; $Divisor : Integer; $RemainderPointer : Poi
 	
 	
 Function getNumberCollection($Collection : Collection)->$NumberCollection : Collection
-	TypeValidation($Collection; True).assert(Is collection; Is real; Is longint; Is integer; Is integer 64 bits)
+	TypeValidation(Is collection; Is real; Is longint; Is integer; Is integer 64 bits).assert($Collection; True)
 	
 	$NumberCollection:=[]
 	var $Value

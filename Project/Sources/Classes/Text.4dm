@@ -29,10 +29,9 @@ Function parse( ... )->$Text : Text
 		 ? $FirstParameter\
 		 : Copy parameters
 	
-	TypeValidation($Parameters; True).assert(\
-		Is real; Is integer; Is longint; Is date; Is time; \
+	TypeValidation(Is real; Is integer; Is longint; Is date; Is time; \
 		Is string var; Is text; Is boolean; Is undefined; Is null; \
-		Is collection/*[$Value;"FORMAT"]*/)
+		Is collection/*[$Value;"FORMAT"]*/).assert($Parameters; True)
 	
 	
 	
@@ -70,13 +69,17 @@ Function parse( ... )->$Text : Text
 		
 		If (Value type($Parameter)=Is collection)
 			ASSERT($Parameter.length=2)
-			TypeValidation($Parameter[0]).assert(\
-				Is real; Is integer; Is longint; Is date; Is time; \
-				Is string var; Is text; Is boolean; Is undefined; Is null)
-			TypeValidation($Parameter[1]).assert(\
-				Is text; Is string var; \
-				Is integer; Is integer 64 bits; Is longint; Is real)
-			$Parameter:=String($Parameter[0]; $Parameter[1])
+			
+			var $Value : Variant:=$Parameter[0]
+			var $Format : Text:=$Parameter[1]
+			
+			TypeValidation(Is real; Is integer; Is longint; Is date; Is time; Is string var; Is text; \
+				Is boolean; Is undefined; Is null)\
+				.assert($Value)
+			TypeValidation(Is text; Is string var; Is integer; Is integer 64 bits; Is longint; Is real)\
+				.assert($Format)
+			
+			$Parameter:=String($Value; $Format)
 		End if 
 		
 		$Text:=Replace string($Text; "`:`"+String($Index+1); String($Parameter))
