@@ -1,13 +1,13 @@
-property ValueCollection : Collection
+property TypeOrClassCollection : Collection
 
-Class constructor($ValueOrValueCollection : Variant; $CheckCollectionItems : Boolean)
-	ASSERT(($CheckCollectionItems=False) || (Value type($ValueOrValueCollection)=Is collection))
-	This.ValueCollection:=$CheckCollectionItems ? $ValueOrValueCollection : [$ValueOrValueCollection]
+Class constructor($FirstTypeOrClass;  ... )
+	ASSERT(Count parameters#0)
+	This.TypeOrClassCollection:=(Value type($FirstTypeOrClass)=Is collection) ? $FirstTypeOrClass : Copy parameters
 	
-Function _checkValue($FunctionObject : Object; $TypeOrClassCollection : Collection; $This : cs.TypeValidation) : Boolean
+Function _checkValue($FunctionObject : Object; $This : cs.TypeValidation) : Boolean
 	var $Value : Variant:=$FunctionObject.value
-	return $TypeOrClassCollection.some($This._checkValueType; $Value)\
-		 || $TypeOrClassCollection.some($This._checkValueClass; $Value)
+	return $This.TypeOrClassCollection.some($This._checkValueType; $Value)\
+		 || $This.TypeOrClassCollection.some($This._checkValueClass; $Value)
 	
 Function _checkValueType($FunctionObject : Object; $Value) : Boolean
 	var $TypeOrClass : Variant:=$FunctionObject.value
@@ -21,9 +21,9 @@ Function _checkValueClass($FunctionObject : Object; $Value) : Boolean
 		 && (OB Instance of($TypeOrClass; 4D.Class))\
 		 && (OB Instance of($Value; $TypeOrClass))
 	
-Function assert($FirstTypeOrClass;  ... )
-	ASSERT(This.check(Copy parameters); JSON Stringify({ValueCollection: This.ValueCollection}))
+Function assert($ValueOrValueCollection : Variant; $CheckCollectionItems : Boolean)
+	ASSERT(This.check($ValueOrValueCollection; $CheckCollectionItems); JSON Stringify({ValueCollection: $ValueOrValueCollection}))
 	
-Function check($FirstTypeOrClass;  ... ) : Boolean
-	var $TypeOrClassCollection : Collection:=Value type($FirstTypeOrClass)=Is collection ? $FirstTypeOrClass : Copy parameters
-	return This.ValueCollection.every(This._checkValue; $TypeOrClassCollection; This)
+Function check($ValueOrValueCollection : Variant; $CheckCollectionItems : Boolean) : Boolean
+	var $ValueCollection : Collection:=$CheckCollectionItems ? $ValueOrValueCollection : [$ValueOrValueCollection]
+	return ($ValueCollection.length=0) || ($ValueCollection.every(This._checkValue; This))

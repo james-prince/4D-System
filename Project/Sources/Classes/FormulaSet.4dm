@@ -5,11 +5,12 @@ property _Parameters : Collection
 property FormulaResults : Collection
 
 Class constructor($FormulaOrFormulaCollection : Variant; $ThisObject : Object; $Parameters : Collection)
-	TypeValidation($FormulaOrFormulaCollection).assert(Is collection; 4D.Function)
+	TypeValidation(Is collection; 4D.Function).assert($FormulaOrFormulaCollection)
 	
 	Case of 
 		: (Value type($FormulaOrFormulaCollection)=Is collection)
-			TypeValidation($FormulaOrFormulaCollection; True).assert(4D.Function)
+			TypeValidation(4D.Function).assert($FormulaOrFormulaCollection; True)
+			
 			This._FormulaCollection:=$FormulaOrFormulaCollection
 			
 		: (OB Instance of($FormulaOrFormulaCollection; 4D.Function))
