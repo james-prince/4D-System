@@ -1,3 +1,3 @@
 //%attributes = {"shared":true,"preemptive":"capable"}
-#DECLARE($ValueOrValueCollection : Variant; $CheckCollectionItems : Boolean) : cs.TypeValidation
-return cs.TypeValidation.new($ValueOrValueCollection; $CheckCollectionItems)
+#DECLARE($FirstTypeOrClass;  ... ) : cs.TypeValidation
+return cs.TypeValidation.new(Copy parameters)
