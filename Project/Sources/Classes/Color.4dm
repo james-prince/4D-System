@@ -55,7 +55,7 @@ Function fromHSL($Hue : Real; $Saturation : Real; $Lightness : Real) : Integer
 	
 	return This.fromRGB($Red; $Green; $Blue)
 	
-Function _util_getRGB($trgb : Integer; $p : Integer; $q : Integer)->$rgbval : Integer
+Function _util_getRGB($trgb : Real; $p : Real; $q : Real)->$rgbval : Real
 	Case of 
 		: ($trgb<(1/6))
 			$rgbval:=$p+(($q-$p)*6*$trgb)
