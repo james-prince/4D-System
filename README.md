@@ -1,38 +1,23 @@
 # 4D-System
- 
 A 4d component containing a collection of classes and project method to extend system functionality.
+# Classes
+# Methods
+## Text
+<!-- Returns a cs.System.Text class object for building formatted, styled and localized strings -->
+### Description
+A shortcut to cs.System.Text.new() that allows quick and readable generation of formatted, styled and localized strings.
+### Example
+```4d
+var $Greeting:=Text("Hello :1, my name is :2").parse("John"; "Mike")
+//$Greeting="Hello John, my name is Mike"
 
-# Color() / cs.System.Color
-A class containing a list of defined colors by name, and functions to generate color integer values or hex codes.
-Can be accessed using the Color() project method shortcut.
-```4D
-var $BackgroundColor : Integer
-$BackgroundColor:=Color.LightCoral
-$BackgroundColor:=Color.Orange
-$BackgroundColor:=Color.Amber
+//You can pass a 2 item colleciton to parse [$Value; $Format] to format the value directly
+var $DisplayPrice:=Text(":1:2").parse("£"; [333333.333333; "####,####,###0.###"])
+//$DisplayPrice="£333,333.33"
 
-$BackgroundColor:=Color.fromRGB(150; 0; 0)
-$BackgroundColor:=Color.fromHSL(180; 0.5; 0.5)
-
-var $HexColor : Text:=Color.toHex(Color.White)  //#FFFFFF
+//You can pass TextStyle class objects using the textStyles() funciton
+//This will apply style tags to text - use [$StyleTagIndex]Text To Style[]
+var $Text:=Text("[1]This text is bold[] and [2]this text is bold and italic[]")
+var $StyledText:=$Text.textStyles(TextStyle.Bold(); TextStyle.Bold().Italic()).parse()
 ```
 
-
-# cs.System.DateTime & cs.System.TimeSpan
-A collection of classes to allow 4D to handle DateTimes and TimeSpans
-```4D
-var $Now:=cs.Sytem.DateTime.new()  //Passing no parameters gets the current date & time
-var $ChristmasMorning:=cs.System.DateTime.new(!2024-12-25!; ?06:00:00?)
-var $BoxingDayMorning:=$ChristmasMorning.add(1)  //.add($Days; $Hours; $Minutes; $Seconds)
-
-var $IsBeforeChristmas : Boolean:=$Now.isBefore($ChristmasMorning)
-
-var $IsChristmasOnTheWeekend : Boolean:=$ChristmasMorning.weekend
-
-var $ChristmasWeekNumber : Integer:=$ChristmasMorning.weekNumber  //52
-
-var $TimeUntilChristmas : cs.System.TimeSpan:=$ChristmasMorning.subtractDateTime($Now)
-ALERT(String($TimeUntilChristmas.days)+" days and "+String($TimeUntilChristmas.hours)+" hours until christmas morning!")
-
-
-```
